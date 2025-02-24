@@ -1,0 +1,46 @@
+.expense-table {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 15px;
+  overflow: hidden;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+}
+
+.expense-table th, .expense-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.expense-table th {
+  background-color: rgba(var(--neon-blue), 0.1);
+}
+
+.expense-table tr {
+  transition: background-color 0.3s ease;
+}
+
+.expense-table tr:hover {
+  background-color: rgba(var(--neon-pink), 0.1);
+}
+
+.category-chip {
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+}
+
+.alimentación { background-color: rgba(var(--neon-green), 0.7); }
+.transporte { background-color: rgba(var(--neon-blue), 0.7); }
+.ocio { background-color: rgba(var(--neon-pink), 0.7); }
+.entretenimiento { background-color: rgba(var(--neon-purple), 0.7); }
+.compras { background-color: rgba(255, 107, 107, 0.7); }
+.educación { background-color: rgba(254, 202, 87, 0.7); }
+.servicios { background-color: rgba(72, 219, 251, 0.7); }
+.salud { background-color: rgba(255, 159, 243, 0.7); }

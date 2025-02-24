@@ -1,0 +1,41 @@
+<div class="summary-cards">
+    <mat-card class="summary-card total-expenses">
+      <mat-card-header>
+        <mat-card-title>Gastos Totales</mat-card-title>
+        <mat-icon>attach_money</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="amount">{{totalExpenses | currency}}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="summary-card average-expense" >
+      <mat-card-header>
+        <mat-card-title>Gasto Promedio</mat-card-title>
+        <mat-icon>trending_flat</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="amount">{{averageExpense | currency}}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="summary-card highest-expense" >
+      <mat-card-header>
+        <mat-card-title>Gasto Más Alto</mat-card-title>
+        <mat-icon>trending_up</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="amount">{{highestExpense | currency}}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="summary-card lowest-expense" >
+      <mat-card-header>
+        <mat-card-title>Gasto Más Bajo</mat-card-title>
+        <mat-icon>trending_down</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="amount">{{lowestExpense | currency}}</span>
+      </mat-card-content>
+    </mat-card>
+  </div>

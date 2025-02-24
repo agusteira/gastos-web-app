@@ -1,0 +1,20 @@
+<table class="expense-table">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Descripción</th>
+      <th>Categoría</th>
+      <th>Monto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let expense of expenses">
+      <td>{{expense.date | date}}</td>
+      <td>{{expense.description}}</td>
+      <td>
+        <span class="category-chip" [ngClass]="expense.category.toLowerCase()">{{expense.category}}</span>
+      </td>
+      <td>{{expense.amount | currency}}</td>
+    </tr>
+  </tbody>
+</table>
