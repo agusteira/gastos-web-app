@@ -1,0 +1,46 @@
+<div class="modal" tabindex="-1" role="dialog" style="display: block;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Gasto</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="date">Fecha</label>
+            <input type="date" id="date" [(ngModel)]="newExpense.date" name="date" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Detalle</label>
+            <input type="text" id="description" [(ngModel)]="newExpense.description" name="description" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="category">Categoría</label>
+            <select id="category" [(ngModel)]="newExpense.category" name="category" class="form-control" required>
+              <option *ngFor="let category of categories" [value]="category" class="opciones">{{category}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Moneda</label>
+            <select id="category" [(ngModel)]="newExpense.currency" name="category" class="form-control" required>
+              <option *ngFor="let currency of currencies" [value]="currency" class="opciones">{{currency}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Monto</label>
+            <input type="number" id="amount" [(ngModel)]="newExpense.amount" name="amount" class="form-control" required>
+          </div>
+          <div class="button-submit">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

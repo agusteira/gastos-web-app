@@ -2,15 +2,18 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { ExpenseSummaryComponent } from "../expense-summary/expense-summary.component";
 import { ExpenseTableComponent } from "../expense-table/expense-table.component";
+import { CommonModule } from '@angular/common';
+import { AgregarGastoComponent } from "../agregar-gasto/agregar-gasto.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, ExpenseSummaryComponent, ExpenseTableComponent],
+  imports: [NavbarComponent, ExpenseSummaryComponent, ExpenseTableComponent, CommonModule, AgregarGastoComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  modalGastos = true;
   expenses = [
     { id: 1, date: '2023-06-01', description: 'Supermercado', amount: 85.50, category: 'Alimentación' },
     { id: 2, date: '2023-06-03', description: 'Gasolina', amount: 45.00, category: 'Transporte' },
@@ -38,5 +41,9 @@ export class HomeComponent {
 
   get lowestExpense(): number {
     return Math.min(...this.expenses.map(expense => expense.amount));
+  }
+
+  abrirModal(){
+    this.modalGastos = true;
   }
 }

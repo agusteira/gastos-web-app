@@ -12,4 +12,11 @@
     <h2 class="section-title">Últimos 10 Gastos</h2>
     
     <app-expense-table [expenses]="expenses"></app-expense-table>
-  </div>
+
+    <div *ngIf="modalGastos" class="modals">
+      <app-agregar-gasto (closeModalEvent)="modalGastos = false"></app-agregar-gasto>
+    </div>
+    
+    <button class="fab" (click)="abrirModal()">+</button>
+
+</div>
