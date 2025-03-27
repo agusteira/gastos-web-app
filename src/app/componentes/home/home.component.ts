@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { ExpenseSummaryComponent } from "../expense-summary/expense-summary.component";
 import { ExpenseTableComponent } from "../expense-table/expense-table.component";
 import { CommonModule } from '@angular/common';
 import { AgregarGastoComponent } from "../agregar-gasto/agregar-gasto.component";
+import { Gasto, GastosService } from '../../servicios/gastos.service';
 
 @Component({
   selector: 'app-home',
@@ -12,23 +13,21 @@ import { AgregarGastoComponent } from "../agregar-gasto/agregar-gasto.component"
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   modalGastos = true;
-  expenses = [
-    { id: 1, date: '2023-06-01', description: 'Supermercado', amount: 85.50, category: 'Alimentación' },
-    { id: 2, date: '2023-06-03', description: 'Gasolina', amount: 45.00, category: 'Transporte' },
-    { id: 3, date: '2023-06-05', description: 'Restaurante', amount: 32.75, category: 'Ocio' },
-    { id: 4, date: '2023-06-07', description: 'Cine', amount: 25.00, category: 'Entretenimiento' },
-    { id: 5, date: '2023-06-10', description: 'Ropa', amount: 120.00, category: 'Compras' },
-    { id: 6, date: '2023-06-12', description: 'Libros', amount: 50.00, category: 'Educación' },
-    { id: 7, date: '2023-06-15', description: 'Electricidad', amount: 75.30, category: 'Servicios' },
-    { id: 8, date: '2023-06-18', description: 'Internet', amount: 60.00, category: 'Servicios' },
-    { id: 9, date: '2023-06-20', description: 'Gimnasio', amount: 40.00, category: 'Salud' },
-    { id: 10, date: '2023-06-23', description: 'Teléfono', amount: 35.00, category: 'Servicios' },
-  ];
+  last10Expenses:  any[] = [];
+  expenses: Gasto[] = [];
+
+  async ngOnInit() {
+    await this.cargarGastos()
+  }
+
+  constructor(private gastosService: GastosService){
+
+  }
 
   get totalExpenses(): number {
-    return this.expenses.reduce((sum, expense) => sum + expense.amount, 0);
+    return this.expenses.reduce((sum, expense) => sum + expense.monto, 0);
   }
 
   get averageExpense(): number {
@@ -36,14 +35,57 @@ export class HomeComponent {
   }
 
   get highestExpense(): number {
-    return Math.max(...this.expenses.map(expense => expense.amount));
+    return Math.max(...this.expenses.map(expense => expense.monto));
   }
 
   get lowestExpense(): number {
-    return Math.min(...this.expenses.map(expense => expense.amount));
+    return Math.min(...this.expenses.map(expense => expense.monto));
   }
 
   abrirModal(){
     this.modalGastos = true;
+  }
+
+
+  cargarGastos(): void {
+    this.gastosService.getGastos().subscribe(
+      (data) => {
+        console.log('Datos recibidos:', data); // ✅ Verifica si llegan los datos
+        this.expenses = data;
+  
+        // ✅ Solo ejecuta la ordenación cuando expenses ya tiene datos
+        this.last10Expenses = this.expenses
+          .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
+          .slice(0, 10);
+      },
+      (error) => {
+        console.error('Error al cargar los gastos', error);
+      }
+    );
+  }
+  
+  agregarGasto(nuevoGasto: Gasto): void {
+    //const nuevoGasto: Gasto = { descripcion: 'Nuevo gasto', monto: 100, fecha: new Date() , categoria: "", usuario: "", moneda: "ARS"};
+
+    this.gastosService.createGasto(nuevoGasto).subscribe(
+      (gastoCreado) => {
+        this.cargarGastos();
+      },
+      (error) => {
+        console.error('Error al crear un gasto', error);
+      }
+    );
+  }
+
+  // Método para eliminar un gasto
+  eliminarGasto(id: number): void {
+    this.gastosService.deleteGasto(id).subscribe(
+      () => {
+        this.expenses = this.expenses.filter((gasto) => gasto.id !== id);
+      },
+      (error) => {
+        console.error('Error al eliminar el gasto', error);
+      }
+    );
   }
 }

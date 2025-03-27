@@ -9,12 +9,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let expense of expenses">
-      <td>{{expense.date | date}}</td>
-      <td>{{expense.description}}</td>
+      <td>{{expense.fecha | date}}</td>
+      <td>{{expense.descripcion}}</td>
       <td>
-        <span class="category-chip" [ngClass]="expense.category.toLowerCase()">{{expense.category}}</span>
+        <span class="category-chip" [ngClass]="expense.categoria.toLowerCase()">{{expense.categoria}}</span>
       </td>
-      <td>{{expense.amount | currency}}</td>
+      <td>{{expense.monto | currency}}</td>
     </tr>
   </tbody>
 </table>

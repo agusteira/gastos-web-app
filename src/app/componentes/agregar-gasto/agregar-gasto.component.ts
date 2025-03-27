@@ -14,11 +14,11 @@ export class AgregarGastoComponent {
   @Output() closeModalEvent = new EventEmitter<void>();  // Evento para cerrar el modal en el componente padre
 
   newExpense = {
-    date: '',
-    description: '',
-    category: '',
-    currency: '',
-    amount: 0,
+    fecha: new Date().toISOString().split('T')[0],
+    descripcion: '',
+    categoria: '',
+    moneda: 'ARS',
+    monto: 0,
 
   };
 
@@ -26,10 +26,21 @@ export class AgregarGastoComponent {
   currencies = ['ARS', 'USD'];  // Ejemplo de categorías
 
   onSubmit() {
-    if (this.newExpense.date && this.newExpense.description && this.newExpense.category && this.newExpense.amount) {
+    if (this.newExpense.fecha && this.newExpense.descripcion && this.newExpense.categoria && this.newExpense.monto) {
       this.addExpense.emit(this.newExpense);  // Emitir los datos del nuevo gasto
       this.closeModal();  // Cerrar el modal después de agregar
+      this.resetForm(); // Opcional: Limpia el formulario después de enviar
     }
+  }
+
+  resetForm() {
+    this.newExpense = {
+      fecha: new Date().toISOString().split('T')[0],
+      descripcion: '',
+      categoria: '',
+      moneda: 'ARS',
+      monto: 0,
+    };
   }
 
   closeModal() {

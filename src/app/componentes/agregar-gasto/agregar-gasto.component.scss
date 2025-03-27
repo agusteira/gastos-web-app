@@ -82,3 +82,19 @@ button[type="submit"]:hover {
 .opciones {
   color: black;
 }
+
+.form-row {
+  display: flex;
+  gap: 1rem; /* Espacio entre los campos */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1; /* Distribuye el espacio equitativamente */
+}
+
+.form-group input,
+.form-group select {
+  width: 100%; /* Asegura que ocupen todo el espacio disponible */
+}
