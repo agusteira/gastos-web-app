@@ -19,18 +19,22 @@ export class AgregarGastoComponent {
     categoria: '',
     moneda: 'ARS',
     monto: 0,
-
+    TipoTransaccion: ""
   };
 
   categories = ['Comida', 'Transporte', 'Ropa', 'Salud', 'Varios'];  // Ejemplo de categorías
   currencies = ['ARS', 'USD'];  // Ejemplo de categorías
 
   onSubmit() {
-    if (this.newExpense.fecha && this.newExpense.descripcion && this.newExpense.categoria && this.newExpense.monto) {
-      this.addExpense.emit(this.newExpense);  // Emitir los datos del nuevo gasto
-      this.closeModal();  // Cerrar el modal después de agregar
-      this.resetForm(); // Opcional: Limpia el formulario después de enviar
+    if (!(this.newExpense.fecha && this.newExpense.descripcion  && this.newExpense.monto  && this.newExpense.TipoTransaccion)){
+      return
     }
+    if(this.newExpense.TipoTransaccion == 'gasto' && !this.newExpense.categoria){
+      return
+    }
+    this.addExpense.emit(this.newExpense);  // Emitir los datos del nuevo gasto
+    this.closeModal();  // Cerrar el modal después de agregar
+    this.resetForm(); // Opcional: Limpia el formulario después de enviar
   }
 
   resetForm() {
@@ -40,9 +44,13 @@ export class AgregarGastoComponent {
       categoria: '',
       moneda: 'ARS',
       monto: 0,
+      TipoTransaccion: ""
     };
   }
 
   closeModal() {
-    this.closeModalEvent.emit();}
+    this.closeModalEvent.emit();
+  }
+
+  //Cuando haya una moneda elegida -> Traer todas las cuentas saldo que tiene para esa moneda 
 }

@@ -1,3 +1,9 @@
+.month-title {
+  margin-bottom: 30px; /* Aumenta el espacio entre meses */
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
 .expense-table {
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
@@ -11,7 +17,7 @@
 }
 
 .expense-table th, .expense-table td {
-  padding: 12px;
+  padding: 6px;
   text-align: left;
 }
 
@@ -36,7 +42,7 @@
   color: white;
 }
 
-.alimentación { background-color: rgba(var(--neon-green), 0.7); }
+.comida { background-color: rgba(var(--neon-green), 0.7); }
 .transporte { background-color: rgba(var(--neon-blue), 0.7); }
 .ocio { background-color: rgba(var(--neon-pink), 0.7); }
 .entretenimiento { background-color: rgba(var(--neon-purple), 0.7); }
@@ -44,3 +50,18 @@
 .educación { background-color: rgba(254, 202, 87, 0.7); }
 .servicios { background-color: rgba(72, 219, 251, 0.7); }
 .salud { background-color: rgba(255, 159, 243, 0.7); }
+.cultura { background-color: rgba(255, 165, 0, 0.7); } /* Naranja brillante */
+.deportes { background-color: rgba(0, 128, 0, 0.7); } /* Verde */
+.tecnología { background-color: rgba(0, 0, 255, 0.7); } /* Azul */
+.viajes { background-color: rgba(255, 69, 0, 0.7); } /* Rojo anaranjado */
+.arte { background-color: rgba(138, 43, 226, 0.7); } /* Púrpura */
+.música { background-color: rgba(255, 20, 147, 0.7); } /* Rosa fuerte */
+
+
+.ingreso {
+  background-color: rgba(0, 255, 0, 0.1); /* Color verdoso para ingresos */
+}
+
+.egreso {
+  background-color: rgba(255, 0, 0, 0.1); /* Color rojizo para egresos */
+}

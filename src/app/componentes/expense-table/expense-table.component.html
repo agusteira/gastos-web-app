@@ -1,20 +1,27 @@
-<table class="expense-table">
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Detalle</th>
-      <th>Categoría</th>
-      <th>Monto</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let expense of expenses">
-      <td>{{expense.fecha | date}}</td>
-      <td>{{expense.descripcion}}</td>
-      <td>
-        <span class="category-chip" [ngClass]="expense.categoria.toLowerCase()">{{expense.categoria}}</span>
-      </td>
-      <td>{{expense.monto | currency}}</td>
-    </tr>
-  </tbody>
-</table>
+<div *ngFor="let month of getMonths(expenses)">
+  <h3 *ngIf="getMonths(expenses).length > 1" class="month-title">{{ month.toUpperCase() }}</h3>
+  <table class="expense-table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Detalle</th>
+        <th>Categoría</th>
+        <th>Monto</th>
+        <th>Moneda</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expense of getExpensesForMonth(month)" [ngClass]="{
+        'ingreso': expense.TipoTransaccion === 'ingreso', 
+        'egreso': expense.TipoTransaccion === 'gasto'}">
+        <td>{{expense.fecha | date}}</td>
+        <td>{{expense.descripcion}}</td>
+        <td>
+          <span class="category-chip" [ngClass]="expense.categoria.toLowerCase()">{{expense.categoria}}</span>
+        </td>
+        <td>{{ expense.monto | currency:"$":display: this.getDecimalFormat(expense.moneda) }}</td>
+        <td>{{expense.moneda}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -98,3 +98,27 @@ button[type="submit"]:hover {
 .form-group select {
   width: 100%; /* Asegura que ocupen todo el espacio disponible */
 }
+//================BOTON TIPO DE TRANSACCION=======================
+.modal-body .btn-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.modal-body .btn-group .btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+}
+
+.modal-body .btn-group .btn.active {
+  background-color: #F7D002; /* Color de fondo cuando se selecciona */
+  color: black;
+}
+
+.modal-body .btn-group .btn:hover {
+  background-color: #FF8C00; /* Color de fondo al pasar el mouse */
+  color: white;
+}

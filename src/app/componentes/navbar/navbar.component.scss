@@ -1,0 +1,10 @@
+.nav-link:hover {
+    color: #f8f9fa; /* Color de texto al pasar el ratón (opcional) */
+    cursor: pointer; /* Asegúrate de que el cursor sea puntero también en hover */
+}
+.navbar-nav .nav-item.active .nav-link {
+    color: rgba(var(--neon-green), 1) !important; /* El color que deseas para los enlaces activos */
+    pointer-events: none; /* Evita que el enlace sea clickeable si está activo */
+    //background-color: rgba(0, 255, 0, 0.1); /* El mismo fondo verdoso o el color que desees */
+  }
+  

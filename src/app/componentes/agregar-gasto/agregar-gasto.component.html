@@ -11,6 +11,15 @@
         <form (ngSubmit)="onSubmit()">
           <div class="form-row">
             <div class="form-group">
+              <label for="type">Tipo</label>
+              <div class="btn-group" role="group" aria-label="Tipo de transacción">
+                <button type="button" class="btn" [class.active]="newExpense.TipoTransaccion === 'gasto'" (click)="newExpense.TipoTransaccion = 'gasto'">Gasto</button>
+                <button type="button" class="btn" [class.active]="newExpense.TipoTransaccion === 'ingreso'" (click)="newExpense.TipoTransaccion = 'ingreso'">Ingreso</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
               <label for="amount">Monto</label>
               <input type="number" id="amount" [(ngModel)]="newExpense.monto" name="amount" class="form-control" required>
             </div>
@@ -31,7 +40,7 @@
             <label for="description">Detalle</label>
             <input type="text" id="description" [(ngModel)]="newExpense.descripcion" name="description" class="form-control" required>
           </div>
-          <div class="form-group">
+          <div class="form-group" *ngIf="newExpense.TipoTransaccion == 'gasto'">
             <label for="category">Categoría</label>
             <select id="category" [(ngModel)]="newExpense.categoria" name="category" class="form-control" required>
               <option *ngFor="let category of categories" [value]="category" class="opciones">{{category}}</option>

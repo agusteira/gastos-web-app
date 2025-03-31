@@ -1,0 +1,61 @@
+.dashboard-container {
+    padding: 2rem;
+    min-height: 100vh;
+    background-color: black;
+    margin: auto;
+    padding-left: 15rem;
+    padding-right: 15rem;
+  }
+  
+  .dashboard-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: glow 2s ease-in-out infinite alternate;
+    color:white;
+    padding-top: 2rem;
+  }
+  
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--neon-blue), 0 0 20px var(--neon-blue);
+    }
+    to {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--neon-pink), 0 0 40px var(--neon-pink);
+    }
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .fab {
+    position: fixed;  /* Fija el botón en una posición en la pantalla */
+    bottom: 20px;     /* Distancia desde el borde inferior */
+    right: 20px;      /* Distancia desde el borde derecho */
+    width: 60px;      /* Ancho del botón */
+    height: 60px;     /* Alto del botón */
+    border-radius: 50%; /* Forma circular */
+    background-color: rgba(255, 255, 255, 0.8); /* Color de fondo blanco con opacidad */
+    color: #333333;   /* Color del icono gris oscuro para un buen contraste */
+    font-size: 30px;  /* Tamaño del símbolo '+' */
+    border: none;     /* Sin bordes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2); /* Sombra ligera para darle un toque futurista */
+    cursor: pointer; /* Cambia el cursor a mano cuando pases por encima */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transiciones suaves para el cambio de color, tamaño y sombra */
+  }
+  
+  .fab:hover {
+    background-color: rgba(255, 255, 255, 1); /* Blanco brillante al pasar el mouse */
+    color: rgba(0, 0, 0, 0.8); /* Color negro para el símbolo '+' en hover */
+    transform: scale(1.1);  /* Efecto de agrandar el botón */
+    box-shadow: 0 4px 25px rgba(255, 255, 255, 0.5); /* Sombra más intensa para el efecto futurista */
+  }
+  
+
+  

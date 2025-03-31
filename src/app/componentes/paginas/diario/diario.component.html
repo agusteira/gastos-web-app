@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="dashboard-container">
+    <h1 class="dashboard-title">Transacciones</h1>
+    
+    <app-expense-table [expenses]="expenses"></app-expense-table>
+
+    <div *ngIf="modalGastos" class="modals">
+      <app-agregar-gasto (closeModalEvent)="modalGastos = false" (addExpense)="agregarGasto($event)"></app-agregar-gasto>
+    </div>
+    
+    <button class="fab" (click)="abrirModal()">+</button>
+
+</div>

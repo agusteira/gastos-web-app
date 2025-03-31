@@ -35,5 +35,31 @@ import { MatCell, MatHeaderCell, MatHeaderRow, MatRow, MatTable } from '@angular
 
 export class ExpenseTableComponent {
   @Input() expenses: any[] = [];
-  displayedColumns: string[] = ['date', 'description', 'category', 'amount'];
+  noDecimalCurrencies = ['ARS']
+
+  display = 'symbol'; // Puede ser 'code', 'symbol' o 'symbol-narrow'
+  // Definir decimales según la moneda
+  getDecimalFormat(currency:string): string {
+    return this.noDecimalCurrencies.includes(currency) ? '1.0-0' : '1.2-2';
+  }
+
+ // Función que obtiene todos los meses, incluyendo aquellos con menos de 10 registros
+  getMonths(expenses: any[]) {
+    const months = expenses.map((expense) => this.getMonthString(expense.fecha));
+    return [...new Set(months)];  // Devuelve los meses únicos
+  }
+
+  // Función que agrupa las expenses por mes
+  getExpensesForMonth(month: string) {
+    return this.expenses.filter(expense => this.getMonthString(expense.fecha) === month);
+  }
+
+  // Función que devuelve el nombre del mes
+  getMonthString(date: string): string {
+    const month = new Date(date).toLocaleString('default', { month: 'long' });
+    return month;
+  }
+
+
+
 }
