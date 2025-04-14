@@ -35,27 +35,72 @@
 
 .category-chip {
   padding: 0.25rem 0.5rem;
-  border-radius: 20px;
+  border-radius: 5px;
   font-size: 0.8rem;
   font-weight: bold;
   text-transform: uppercase;
   color: white;
 }
 
-.comida { background-color: rgba(var(--neon-green), 0.7); }
-.transporte { background-color: rgba(var(--neon-blue), 0.7); }
+/*.compras { background-color: rgba(var(--neon-green), 0.7); }
+.Mantenimiento { background-color: rgba(var(--neon-blue), 0.7); }
 .ocio { background-color: rgba(var(--neon-pink), 0.7); }
-.entretenimiento { background-color: rgba(var(--neon-purple), 0.7); }
-.compras { background-color: rgba(255, 107, 107, 0.7); }
-.educación { background-color: rgba(254, 202, 87, 0.7); }
-.servicios { background-color: rgba(72, 219, 251, 0.7); }
-.salud { background-color: rgba(255, 159, 243, 0.7); }
-.cultura { background-color: rgba(255, 165, 0, 0.7); } /* Naranja brillante */
-.deportes { background-color: rgba(0, 128, 0, 0.7); } /* Verde */
-.tecnología { background-color: rgba(0, 0, 255, 0.7); } /* Azul */
-.viajes { background-color: rgba(255, 69, 0, 0.7); } /* Rojo anaranjado */
-.arte { background-color: rgba(138, 43, 226, 0.7); } /* Púrpura */
-.música { background-color: rgba(255, 20, 147, 0.7); } /* Rosa fuerte */
+.entretenimiento { background-color: rgba(var(--neon-purple), 0.7); }*/
+.compras {
+  background-color: rgba(111, 0, 0, 0.8); /* Bordó oscuro */
+  color: #fff;
+}
+
+.mantenimiento {
+  background-color: rgba(130, 90, 0, 0.8); /* Marrón oscuro tirando a dorado viejo */
+  color: #fff;
+}
+
+.transporte {
+  background-color: rgba(0, 60, 80, 0.8); /* Azul petróleo profundo */
+  color: #fff;
+}
+
+.salud {
+  background-color: rgba(58, 94, 103, 0.8); /* Verde azulado oscuro */
+  color: #fff;
+}
+
+.comida {
+  background-color: rgba(102, 51, 0, 0.8); /* Marrón quemado */
+  color: #fff;
+}
+
+.ocio {
+  background-color: rgba(40, 40, 120, 0.8); /* Azul oscuro sobrio */
+  color: #fff;
+}
+
+.ropa {
+  background-color: rgba(70, 0, 110, 0.8); /* Violeta oscuro elegante */
+  color: #fff;
+}
+
+.entretenimiento {
+  background-color: rgba(139, 0, 0, 0.8); /* Rojo sangre sobrio */
+  color: #fff;
+}
+
+.seguro {
+  background-color: rgba(90, 0, 120, 0.8); /* Púrpura profundo */
+  color: #fff;
+}
+
+.regalos {
+  background-color: rgba(120, 20, 60, 0.8); /* Rosa oscuro tipo vino */
+  color: #fff;
+}
+
+.otros {
+  background-color: rgba(80, 80, 80, 0.8); /* Gris oscuro neutro */
+  color: #fff;
+}
+
 
 
 .ingreso {

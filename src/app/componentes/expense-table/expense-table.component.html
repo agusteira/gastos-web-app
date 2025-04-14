@@ -13,13 +13,13 @@
     <tbody>
       <tr *ngFor="let expense of getExpensesForMonth(month)" [ngClass]="{
         'ingreso': expense.TipoTransaccion === 'ingreso', 
-        'egreso': expense.TipoTransaccion === 'gasto'}">
+        'egreso': expense.TipoTransaccion === 'gasto'}" >
         <td>{{expense.fecha | date}}</td>
         <td>{{expense.descripcion}}</td>
         <td>
           <span class="category-chip" [ngClass]="expense.categoria.toLowerCase()">{{expense.categoria}}</span>
         </td>
-        <td>{{ expense.monto | currency:"$":display: this.getDecimalFormat(expense.moneda) }}</td>
+        <td >{{ expense.monto | currency:"$":display: this.getDecimalFormat(expense.moneda) }}</td>
         <td>{{expense.moneda}}</td>
       </tr>
     </tbody>

@@ -2,11 +2,13 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 import { HomeComponent } from './componentes/paginas/home/home.component';
 import { DiarioComponent } from './componentes/paginas/diario/diario.component';
+import { CuentasComponent } from './componentes/paginas/cuentas/cuentas.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'diario', component: DiarioComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'cuentas', component: CuentasComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },  // Ruta por defecto
     /*{ path: 'signUp', component: SignUpComponent },
     { path: 'quien-soy', component: QuienSoyComponent },

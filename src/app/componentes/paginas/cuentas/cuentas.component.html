@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<div class="dashboard-container">
+    <h1 class="dashboard-title">Cuentas</h1>
+    
+    <div class="summary-cards">
+      <div *ngFor="let cuenta of cuentas">
+        <mat-card class="summary-card total-expenses">
+          <mat-card-header>
+            <mat-card-title>{{cuenta.nombre}} ({{cuenta.moneda}})</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <span class="amount">{{this.cargarSaldo(cuenta.nombre) | currency:"$":display: this.getDecimalFormat(cuenta.moneda)}}</span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      
+      <div *ngIf="cuentas.length == 0">
+        <mat-card class="summary-card total-expenses">
+          <mat-card-content>
+            <span class="amount">Agregar cuenta</span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <div *ngIf="modalCuentas" class="modals">
+      <app-agregar-cuenta (closeModalEvent)="modalCuentas = false" (addExpense)="agregarCuenta($event)"></app-agregar-cuenta>
+    </div>
+
+    <button class="fab" (click)="abrirModal()">+</button>
+
+</div>

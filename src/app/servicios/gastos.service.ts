@@ -11,6 +11,7 @@ export interface Gasto {
   usuario: string;
   moneda: string;
   TipoTransaccion: string;
+  cuenta:string;
 }
 
 @Injectable({

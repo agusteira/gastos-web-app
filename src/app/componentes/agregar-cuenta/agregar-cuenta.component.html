@@ -1,0 +1,42 @@
+<div class="modal" tabindex="-1" role="dialog" style="display: block;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar cuenta</h5>
+          <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label for="description">Nombre</label>
+                <input type="text" id="description" [(ngModel)]="nuevaCuenta.nombre" name="description" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Tipo</label>
+                <select id="category" [(ngModel)]="nuevaCuenta.tipo" name="category" class="form-control" required>
+                  <option *ngFor="let category of categories" [value]="category" class="opciones">{{category}}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="currency">Moneda</label>
+                <select id="currency" [(ngModel)]="nuevaCuenta.moneda" name="currency" class="form-control" required>
+                  <option *ngFor="let currency of currencies" [value]="currency" [selected]="currency === 'USD'" class="opciones">{{currency}}</option>
+                </select>
+              </div>
+            
+  
+            <div class="button-submit">
+              <button type="submit" class="btn btn-primary">Agregar</button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
