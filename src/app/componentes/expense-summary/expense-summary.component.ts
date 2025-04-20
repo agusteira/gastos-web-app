@@ -4,6 +4,7 @@ import { CommonModule, CurrencyPipe, NgIf } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Gasto } from '../../servicios/gastos.service';
 
 const fadeInUp = trigger('fadeInUp', [
   transition(':enter', [
@@ -26,8 +27,35 @@ const fadeInUp = trigger('fadeInUp', [
   animations:[fadeInUp] 
 })
 export class ExpenseSummaryComponent {
-  @Input() totalExpenses: number = 0;
-  @Input() averageExpense: number = 0;
-  @Input() highestExpense: number = 0;
-  @Input() lowestExpense: number = 0;
+  @Input() expenseSummary: Gasto[] = [];
+
+  get totalBalance(): number {
+    const ingresos = this.expenseSummary
+    .filter(expense => expense.TipoTransaccion == "ingreso")
+    .reduce((sum, expense) => sum + expense.monto, 0); 
+
+    const egresos = this.expenseSummary
+    .filter(expense => expense.TipoTransaccion == "gasto")
+    .reduce((sum, expense) => sum + expense.monto, 0); 
+
+    return ingresos - egresos;
+  }
+
+   get monthlyIncome(): number {
+    return this.expenseSummary
+    .filter(expense => expense.TipoTransaccion == "ingreso")
+    .reduce((sum, expense) => sum + expense.monto, 0); 
+  }
+
+  get budgetPercentage(): number {
+    const ingresos = this.expenseSummary
+    .filter(expense => expense.TipoTransaccion == "ingreso")
+    .reduce((sum, expense) => sum + expense.monto, 0); 
+
+    const egresos = this.expenseSummary
+    .filter(expense => expense.TipoTransaccion == "gasto")
+    .reduce((sum, expense) => sum + expense.monto, 0); 
+
+    return egresos/ingresos * 100;
+  }
 }

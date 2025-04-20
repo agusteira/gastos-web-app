@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Gasto {
-  id?: number;
+  id: number;
   fecha: Date;
   descripcion: string;
   monto: number;
@@ -33,5 +33,9 @@ export class GastosService {
 
   deleteGasto(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  updateGasto(gasto: Gasto): Observable<Gasto> {
+    return this.http.put<Gasto>(this.apiUrl, gasto);
   }
 }

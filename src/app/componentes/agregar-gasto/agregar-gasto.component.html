@@ -52,9 +52,27 @@
 
           <div class="form-group" id="cuentas">
             <label for="category">Cuenta</label>
-            <select id="category" [(ngModel)]="newExpense.cuenta" name="category" class="form-control" required>
-              <option *ngFor="let cuenta of cuentasVisibles" [value]="cuenta.nombre" class="opciones">{{cuenta.nombre}}</option>
-            </select>
+            <!--<select id="category" [(ngModel)]="newExpense.cuenta" name="category" class="form-control" required>
+              <option value="" disabled selected *ngIf="!newExpense.cuenta">Seleccione una cuenta</option>
+              <option *ngFor="let cuenta of cuentasVisibles"  class="opciones">{{cuenta.nombre}}</option>
+            </select>-->
+            <select 
+            [(ngModel)]="newExpense.cuenta" 
+            name="cuenta" 
+            class="form-control" 
+            required>
+            
+            <option value="" disabled *ngIf="!newExpense.cuenta">Seleccione una cuenta</option>
+            
+            <option 
+              *ngFor="let cuenta of cuentasVisibles" 
+              [value]="cuenta.nombre" 
+              class="opciones">
+              {{ cuenta.nombre }}
+            </option>
+          </select>
+          
+            
           </div>
 
           <div class="form-group" *ngIf="newExpense.TipoTransaccion == 'gasto'" id="categorias">

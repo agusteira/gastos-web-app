@@ -1,28 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg fixed-top">
-  <div class="container">
-    <a class="navbar-brand text-neon"  (click)="redirigir('/home')">Gastos</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link text-neon" (click)="redirigir('/diario')">Transacciones</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-neon" (click)="redirigir('/diario')">Dashboard</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-neon" (click)="redirigir('/diario')">Saldos</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-neon" (click)="redirigir('/cuentas')">Cuentas</a>
-        </li>
-
-      </ul>
+<header class="header">
+  <div class="header-content">
+    <h1 class="title">Expense Tracker</h1>
+    <nav class="navigation">
+      <a routerLink="/home" routerLinkActive="active" class="nav-link" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+      <a routerLink="/diario" routerLinkActive="active" class="nav-link" [routerLinkActiveOptions]="{ exact: true }">Transacciones</a>
+      <a routerLink="/cuentas" routerLinkActive="active" class="nav-link" [routerLinkActiveOptions]="{ exact: true }">Cuentas</a>
+    </nav>
+    <div class="profile">
+      <img src="assets/profile.png" alt="Profile" class="profile-image">
     </div>
   </div>
-</nav>
+</header>

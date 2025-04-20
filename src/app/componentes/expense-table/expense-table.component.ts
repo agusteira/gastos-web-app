@@ -1,9 +1,10 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { CommonModule, CurrencyPipe, DatePipe, NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCell, MatHeaderCell, MatHeaderRow, MatRow, MatTable } from '@angular/material/table';
+import { Gasto, GastosService } from '../../servicios/gastos.service';
 
 @Component({
   selector: 'app-expense-table',
@@ -35,7 +36,12 @@ import { MatCell, MatHeaderCell, MatHeaderRow, MatRow, MatTable } from '@angular
 
 export class ExpenseTableComponent {
   @Input() expenses: any[] = [];
+  @Output() updateEvent = new EventEmitter<Gasto>();
   noDecimalCurrencies = ['ARS']
+
+  constructor(private gastosService: GastosService){
+      
+  }
 
   display = 'symbol'; // Puede ser 'code', 'symbol' o 'symbol-narrow'
   // Definir decimales según la moneda
@@ -60,6 +66,18 @@ export class ExpenseTableComponent {
     return month;
   }
 
+  editarGasto(expense:Gasto){
+    this.updateEvent.emit(expense);
+  }
 
-
+  eliminarGasto(expense:Gasto): void {
+    this.gastosService.deleteGasto(expense.id).subscribe(
+      () => {
+        this.expenses = this.expenses.filter((gasto) => gasto.id !== expense.id);
+      },
+      (error) => {
+        console.error('Error al eliminar el gasto', error);
+      }
+    );
+  }
 }

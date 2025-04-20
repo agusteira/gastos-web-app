@@ -18,6 +18,19 @@ export class HomeComponent implements OnInit{
   modalGastos = false;
   last10Expenses:  any[] = [];
   expenses: Gasto[] = [];
+  mesSeleccionado: number = new Date().getMonth(); // 0 = enero
+  anioSeleccionado: number = new Date().getFullYear();
+  newExpense = {
+    fecha: new Date().toISOString().split('T')[0],
+    descripcion: '',
+    categoria: '',
+    moneda: 'ARS',
+    monto: 0,
+    TipoTransaccion: "",
+    cuenta: "",
+    flag: "create",
+    id: 0
+  };
 
   async ngOnInit() {
     await this.cargarGastos()
@@ -26,45 +39,38 @@ export class HomeComponent implements OnInit{
   constructor(private gastosService: GastosService){
     
   }
-
-  // Verifica si la fecha del gasto es del mes actual
-  isCurrentMonth(fecha: Date): boolean {
-    const today = new Date();
-    const expenseMonth = new Date(fecha).getMonth();
-    const currentMonth = today.getMonth();
-    const expenseYear = new Date(fecha).getFullYear();
-    const currentYear = today.getFullYear();
-
-    return expenseMonth === currentMonth && expenseYear === currentYear;
+  isSpecificMonth(fecha: Date | string, mes: number, anio: number): boolean {
+    const expenseDate = new Date(fecha);
+  
+    return (
+      expenseDate.getMonth() === mes &&
+      expenseDate.getFullYear() === anio
+    );
   }
-
-
-  get totalExpenses(): number {
+  get expenseSummary(): Gasto[] {
     return this.expenses
-      .filter(expense => this.isCurrentMonth(expense.fecha)) // Filtramos solo los gastos del mes actual
-      .filter(expense => expense.TipoTransaccion == "gasto")
-      .reduce((sum, expense) => sum + expense.monto, 0);
+      .filter(expense => this.isSpecificMonth(expense.fecha, this.mesSeleccionado, this.anioSeleccionado)) // Filtramos solo los gastos del mes actual
   }
+
   
-  get averageExpense(): number {
-    const currentMonthExpenses = this.expenses.filter(expense => this.isCurrentMonth(expense.fecha)).filter(expense => expense.TipoTransaccion == "gasto");
-    return currentMonthExpenses.length > 0
-      ? this.totalExpenses / currentMonthExpenses.length
-      : 0; // Evitar división por cero
+  cambiarMes(direccion: number) {
+    this.mesSeleccionado += direccion;
+
+    if (this.mesSeleccionado < 0) {
+      this.mesSeleccionado = 11;
+      this.anioSeleccionado--;
+    } else if (this.mesSeleccionado > 11) {
+      this.mesSeleccionado = 0;
+      this.anioSeleccionado++;
+    }
   }
-  
-  get highestExpense(): number {
-    const currentMonthExpenses = this.expenses.filter(expense => this.isCurrentMonth(expense.fecha)).filter(expense => expense.TipoTransaccion == "gasto");
-    return currentMonthExpenses.length > 0
-      ? Math.max(...currentMonthExpenses.map(expense => expense.monto))
-      : 0; // Evitar error si no hay gastos del mes actual
-  }
-  
-  get lowestExpense(): number {
-    const currentMonthExpenses = this.expenses.filter(expense => this.isCurrentMonth(expense.fecha)).filter(expense => expense.TipoTransaccion == "gasto");
-    return currentMonthExpenses.length > 0
-      ? Math.min(...currentMonthExpenses.map(expense => expense.monto))
-      : 0; // Evitar error si no hay gastos del mes actual
+
+  obtenerNombreMes(mes: number): string {
+    const nombresMeses = [
+      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+    return nombresMeses[mes];
   }
   
 
@@ -72,6 +78,7 @@ export class HomeComponent implements OnInit{
     this.modalGastos = true;
   }
 
+  //=========CRUD GASTOS============= 
 
   cargarGastos(): void {
     this.gastosService.getGastos().subscribe(
@@ -92,7 +99,6 @@ export class HomeComponent implements OnInit{
   
   agregarGasto(nuevoGasto: Gasto): void {
     //const nuevoGasto: Gasto = { descripcion: 'Nuevo gasto', monto: 100, fecha: new Date() , categoria: "", usuario: "", moneda: "ARS"};
-
     this.gastosService.createGasto(nuevoGasto).subscribe(
       (gastoCreado) => {
         this.cargarGastos();
@@ -103,7 +109,7 @@ export class HomeComponent implements OnInit{
     );
   }
 
-  // Método para eliminar un gasto
+  // Método para eliminar un gasto  
   eliminarGasto(id: number): void {
     this.gastosService.deleteGasto(id).subscribe(
       () => {
@@ -114,4 +120,34 @@ export class HomeComponent implements OnInit{
       }
     );
   }
+
+  editarGasto(gastoEditado: any){
+    console.log("updateando gasto")
+    delete gastoEditado.flag
+    this.gastosService.updateGasto(gastoEditado).subscribe(
+      (gastoCreado) => {
+        this.cargarGastos();
+      },
+      (error) => {
+        console.error('Error al crear un gasto', error);
+      }
+    );
+  }
+
+  updateExpense(gasto:Gasto){
+    this.newExpense = {
+      fecha: new Date(gasto.fecha).toISOString().split('T')[0],
+      descripcion: gasto.descripcion,
+      categoria: gasto.categoria,
+      moneda:gasto.moneda,
+      monto: gasto.monto,
+      TipoTransaccion: gasto.TipoTransaccion,
+      cuenta: gasto.cuenta,
+      flag: "update",
+      id: gasto.id
+    };
+    this.abrirModal()
+  }
+
+  //====================== 
 }

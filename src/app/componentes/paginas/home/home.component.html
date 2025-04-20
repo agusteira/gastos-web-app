@@ -1,20 +1,26 @@
 <app-navbar></app-navbar>
 <div class="dashboard-container">
-    <h1 class="dashboard-title">Dashboard de Gastos Futurista</h1>
-    
+    <div class="month-selector">
+      <button (click)="cambiarMes(-1)">&#8592;</button>
+      <span>{{ obtenerNombreMes(mesSeleccionado) }} {{ anioSeleccionado }}</span>
+      <button (click)="cambiarMes(1)">&#8594;</button>
+    </div>
+  
     <app-expense-summary
-      [totalExpenses]="totalExpenses"
-      [averageExpense]="averageExpense"
-      [highestExpense]="highestExpense"
-      [lowestExpense]="lowestExpense">
+      [expenseSummary]="expenseSummary">
     </app-expense-summary>
   
     <h2 class="section-title">Últimas 10 transacciones</h2>
     
-    <app-expense-table [expenses]="last10Expenses"></app-expense-table>
+    <app-expense-table [expenses]="last10Expenses" (updateEvent)="updateExpense($event)"></app-expense-table>
 
     <div *ngIf="modalGastos" class="modals">
-      <app-agregar-gasto (closeModalEvent)="modalGastos = false" (addExpense)="agregarGasto($event)"></app-agregar-gasto>
+      <app-agregar-gasto 
+          (closeModalEvent)="modalGastos = false; newExpense = $event" 
+          (addExpense)="agregarGasto($event)"
+          (updateExpense)="editarGasto($event)"
+          [newExpense]="newExpense">
+      </app-agregar-gasto>
     </div>
     
     <button class="fab" (click)="abrirModal()">+</button>
