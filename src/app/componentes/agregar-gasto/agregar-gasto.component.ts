@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, NgModuleFactory, Output } from '@angula
 import { FormsModule } from '@angular/forms';
 import { Cuenta, CuentasService } from '../../servicios/cuentas.service';
 import { Gasto } from '../../servicios/gastos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-gasto',
@@ -16,12 +17,12 @@ export class AgregarGastoComponent {
   @Output() updateExpense = new EventEmitter<any>();
   @Output() closeModalEvent = new EventEmitter<any>();  // Evento para cerrar el modal en el componente padre
   @Input() newExpense: any;
+  @Input() categories: any;
 
-  constructor(private cuentasService: CuentasService){}
+  constructor(private cuentasService: CuentasService, private router: Router){}
 
   async ngOnInit() {
-    
-    await this.cargarCuentas()
+    this.cargarCuentas()
   }
 
 
@@ -35,8 +36,8 @@ export class AgregarGastoComponent {
     cuenta: ""
   };*/
 
-  categories = ['Comida', 'Transporte', 'Ropa', 'Salud', 'Varios'];  // Ejemplo de categorías
-  currencies = ['ARS', 'USD'];  // Ejemplo de categorías
+  //categories = ['Comida', 'Transporte', 'Ropa', 'Salud', 'Varios'];
+  currencies = ['ARS', 'USD']; 
   cuentas: Cuenta[] = []
   cuentasVisibles: Cuenta[] = []
   cuentaPrecargada: any;
@@ -93,5 +94,13 @@ export class AgregarGastoComponent {
 
   }
 
+  onCuentaChange(value: string){
+    if (value === 'agregar') {
+      console.log("holaaa")
+        this.router.navigate(["/cuentas"]);
+    }
+    
+
+  }
   //Cuando haya una moneda elegida -> Traer todas las cuentas saldo que tiene para esa moneda 
 }

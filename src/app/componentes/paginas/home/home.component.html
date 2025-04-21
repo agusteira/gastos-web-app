@@ -19,7 +19,8 @@
           (closeModalEvent)="modalGastos = false; newExpense = $event" 
           (addExpense)="agregarGasto($event)"
           (updateExpense)="editarGasto($event)"
-          [newExpense]="newExpense">
+          [newExpense]="newExpense"
+          [categories]="categories">
       </app-agregar-gasto>
     </div>
     

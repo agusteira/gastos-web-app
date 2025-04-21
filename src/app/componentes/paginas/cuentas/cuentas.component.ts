@@ -80,6 +80,8 @@ export class CuentasComponent {
   }
   
 
+  
+
   getDecimalFormat(currency:string): string {
     return this.noDecimalCurrencies.includes(currency) ? '1.0-0' : '1.2-2';
   }

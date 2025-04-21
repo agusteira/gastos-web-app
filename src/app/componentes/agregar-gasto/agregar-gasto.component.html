@@ -2,7 +2,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Agregar Gasto</h5>
+        <h5 class="modal-title" *ngIf="this.newExpense.flag == 'create'">Agregar Gasto</h5>
+        <h5 class="modal-title" *ngIf="this.newExpense.flag == 'update'">Modificar Gasto</h5>
         <button type="button" class="close" aria-label="Close" (click)="closeModal()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -58,6 +59,7 @@
             </select>-->
             <select 
             [(ngModel)]="newExpense.cuenta" 
+            (ngModelChange)="onCuentaChange($event)"
             name="cuenta" 
             class="form-control" 
             required>
@@ -68,8 +70,10 @@
               *ngFor="let cuenta of cuentasVisibles" 
               [value]="cuenta.nombre" 
               class="opciones">
-              {{ cuenta.nombre }}
+              {{ cuenta.nombre }} ({{ cuenta.tipo }})
             </option>
+
+            <option class="opciones" value="agregar">Agregar</option>
           </select>
           
             
@@ -88,7 +92,9 @@
           </div>
 
           <div class="button-submit">
-            <button type="submit" class="btn btn-primary">Agregar</button>
+            <button type="submit" class="btn btn-primary">
+              Ok
+            </button>
           </div>
           
         </form>

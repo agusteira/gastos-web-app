@@ -51,6 +51,16 @@ export class HomeComponent implements OnInit{
     return this.expenses
       .filter(expense => this.isSpecificMonth(expense.fecha, this.mesSeleccionado, this.anioSeleccionado)) // Filtramos solo los gastos del mes actual
   }
+  get categories(): string[]{
+    const categories = [
+      ...new Set(
+        this.expenses
+          .map(e => e.categoria)
+          .filter(c => c && c.trim() !== '')
+      )
+    ];
+    return categories
+  }
 
   
   cambiarMes(direccion: number) {
@@ -83,7 +93,6 @@ export class HomeComponent implements OnInit{
   cargarGastos(): void {
     this.gastosService.getGastos().subscribe(
       (data) => {
-        console.log('Datos recibidos:', data); // ✅ Verifica si llegan los datos
         this.expenses = data;
   
         // ✅ Solo ejecuta la ordenación cuando expenses ya tiene datos
@@ -122,7 +131,6 @@ export class HomeComponent implements OnInit{
   }
 
   editarGasto(gastoEditado: any){
-    console.log("updateando gasto")
     delete gastoEditado.flag
     this.gastosService.updateGasto(gastoEditado).subscribe(
       (gastoCreado) => {
